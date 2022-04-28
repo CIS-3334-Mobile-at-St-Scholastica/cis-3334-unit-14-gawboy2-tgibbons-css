@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gawboy_media/item_repo.dart';
+import 'item_repo.dart';
 import 'package:just_audio/just_audio.dart';
 
 void main() {

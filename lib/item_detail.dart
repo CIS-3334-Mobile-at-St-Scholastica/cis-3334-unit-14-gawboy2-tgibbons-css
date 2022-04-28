@@ -1,16 +1,26 @@
 
 //  Holds the details for a single painting
 class ItemDetail {
-  String category = '';             //Image category
-  String title = '';                //Image title
-  String imageFileName = '';        //Image file
-  String authorAudioFileName = '';  // Gawboy audio file
-  String elderAudioFileName = '';   //Jourdain audio file
-  //Gawboy text description
-  //Jourdain text description in English
-  //Jourdain text description in Anishinaabe
+  int num = 0;
+  String catagory = '';             //Image category
+  String name = '';                //Image title
+  String imageFile = '';        //Image file
+  String GawboyAudio = '';  // Gawboy audio file
+  String JourdainAudio = '';   //Jourdain audio file
+  String GawboyDescription = '';    // Author description as text
+  String JourdainAnishinaabe = '';  // Elders text in ojibwe (really English)
+  String JourdainEnglish = '';      // Elders text in English (really Anininaabe)
 
-  ItemDetail(String this.imageFileName, String this.authorAudioFileName) {
+  // constructor using only the image file name and author audio file
+  //ItemDetail(String this.imageFile, String this.GawboyAudio) {
+  //}
+  // constructor with image number, image file, catagory and title
+  // (1,'by_the_fire_1.jpg', 'By the Fire', 'Chippewa Camp Scene')
+  ItemDetail(int this.num, String this.imageFile, String this.catagory, this.name) {
+  }
+
+  void setGawboyDescription(String newDescription) {
+    this.GawboyDescription = newDescription;
   }
 
 }
