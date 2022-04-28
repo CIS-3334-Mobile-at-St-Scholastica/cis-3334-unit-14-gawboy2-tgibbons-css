@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gawboy_part2/item_detail.dart';
 import 'item_repo.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -32,13 +33,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   late AudioPlayer player;
   itemRepository myImages = itemRepository();
+  late Future<List<ItemDetail>> myFutureList;
 
   @override
   void initState() {
     player = AudioPlayer();
+    myFutureList = myImages.InitWithJson();
     super.initState();
   }
 
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void playAudioFile(int index) {
-    player.setAsset( myImages.getAuthorAudio(index) );
+    player.setAsset(myImages.getAuthorAudio(index));
     player.play();
   }
 
@@ -59,15 +61,39 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: PageView.builder(
-          itemCount: myImages.getLength(),
-          itemBuilder: (context, index ) {
-            playAudioFile(index);
-            return Image.asset(myImages.getImageFile(index), fit: BoxFit.cover, );
-          }
-      )
+      body: FutureBuilder<List<ItemDetail>>(
+        future: myFutureList,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Text('Loading');
+          } else {
+            return PageView.builder(
+                itemCount: myImages.getLength(),
+                itemBuilder: (context, index) {
+                  //playAudioFile(index);
+                  return Container(
+                    child: Stack(
+                      children: [
+                        Container(
+                          alignment: FractionalOffset(0.5, 0.8),
+                          child: Text(
+                            'Sample text',
+                          ),
+                        ),
+                        Container(
+                            child: Image.asset(
+                          myImages.getImageFile(index),
+                          fit: BoxFit.cover,
+                        )),
+                      ],
+                    ),
+                  );
+                });
+          } // if then
 
-      // This trailing comma makes auto-formatting nicer for build methods.
+          // This trailing comma makes auto-formatting nicer for build methods.
+        },
+      ),
     );
   }
 }

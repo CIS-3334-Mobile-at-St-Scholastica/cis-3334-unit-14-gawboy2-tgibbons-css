@@ -1,4 +1,5 @@
-
+import 'dart:convert';                      // needed for json convert
+import 'package:flutter/services.dart';     // needed for folder location
 import 'item_detail.dart';
 
 class itemRepository {
@@ -10,7 +11,20 @@ class itemRepository {
   List<ItemDetail> itemList = [];
 
   itemRepository() {
-    InitInCode();
+    //InitInCode();
+
+  }
+
+  Future<List<ItemDetail>> InitWithJson() async {
+    final String response = await rootBundle.loadString('assets/text/image_list2.json');
+    final List<dynamic> data = await json.decode(response);
+    List<ItemDetail> items = [];
+    for (dynamic it in data) {
+      final ItemDetail item = ItemDetail.fromJson(it);    // Parse data for one DataItem
+      items.add(item);                                // add item to items List
+    }
+    return items;
+
   }
 
   // This method shows how to initialize some of the data items directly in code.

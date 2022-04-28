@@ -23,4 +23,16 @@ class ItemDetail {
     this.GawboyDescription = newDescription;
   }
 
+  ItemDetail.fromJson(Map<String, dynamic> json)
+      : num = json['num'],
+        imageFile = json['imageFile'],
+        catagory = json['catagory'],
+        name = json['name'],
+        GawboyDescription = json['gawboyDescription'],
+        GawboyAudio = json['gawboyAudio'],
+        JourdainAnishinaabe = json['JourdainAnishinaabe'],
+        JourdainEnglish = json['JourdainEnglish'],
+        JourdainAudio = json['JourdainAudio'];
+
+
 }
